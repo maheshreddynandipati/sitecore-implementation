@@ -1,0 +1,3 @@
+#%RAML 1.0 NamedExample
+query-example:
+  e.g. (Definition.Name=='M.Asset' AND Parent('AvailableToToAsset').id==20650 AND DateTime('CreatedOn') gte 20190201T000000 AND DateTime('CreatedOn') lt 20190301T000000 AND (Parent('FinalLifeCycleStatusToAsset').id==3716 OR Parent('FinalLifeCycleStatusToAsset').id==3718) AND String('MIMEType')=="application/vnd.adobe.photoshop")&sort=ModifiedOn:D&take=10
