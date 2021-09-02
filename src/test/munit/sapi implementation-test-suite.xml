@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="sapi implementation-test-suite.xml" />
+	<munit:test name="suite-getflowTest" doc:id="41abc49a-2025-4f3c-b203-574f30d340a3" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow Reference" doc:id="59e539b0-9ccb-42d8-82ea-7808e0b62563" name="sapi_implementation-test-suiteFlow"/>
+			<flow-ref doc:name="Flow-ref to getflow" doc:id="c36c4f9f-4772-4188-b37f-32b65ac9f969" name="getflow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="87d60425-7bfd-4b13-8b9f-3f84706bc59a" expression="#[payload]" is="#[MunitTools::notNullValue()]" message="payload is not null"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="test-suite-getflowTest" doc:id="b5e57377-d6f9-419f-8a8c-7c1093b7a06c" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow Reference" doc:id="c80191d4-5727-4af0-b2a4-00cfadeadf66" name="sapi_implementation-test-suiteFlow"/>
+			<flow-ref doc:name="Flow-ref to getflow" doc:id="1d56880c-f454-423e-bf8b-be6014836682" name="getflow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="e06be6e5-2be0-4713-9ab4-f8b9cee12d36" expression="#[payload]" is="#[MunitTools::withMediaType('application/json')]" message="media type is incorrect"/>
+		</munit:validation>
+	</munit:test>
+	<flow name="sapi_implementation-test-suiteFlow" doc:id="c9fe6fd9-7937-4592-ad9e-bff55e06b50b" >
+		<munit:set-event doc:name="Set Event" doc:id="60c961c0-5999-4477-9040-326e3ffc7cec" >
+			<munit:attributes value="#[{uriParams:{assetid:'4668750'}}]" />
+		</munit:set-event>
+	</flow>
+	<munit:test name="implementation-test-suite-getflowTest1" doc:id="0ad1e1ed-5586-46a6-8805-2960ce10a585" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow Reference" doc:id="449589ca-0d8b-4512-a335-b8aa19068bf6" name="sapi_implementation-test-suiteFlow"/>
+			<flow-ref doc:name="Flow-ref to getflow" doc:id="1f94d443-4b60-42e5-8b2b-fc34f130c9f1" name="getflow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="d4bcb55e-67a3-40e4-b5cb-6a14c1ac51ae" is='#[MunitTools::equalTo([["en-US"]])]' expression="#[payload.cultures]" message="id value is not correct"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="sapi implementation-test-suite-putbyassetidTest" doc:id="0fd27e0a-39f6-499d-9e48-6401cf70fa76" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to putbyassetid" doc:id="a249bb51-1dab-44cb-9e7c-7e0605b9280b" name="putbyassetid"/>
+		</munit:execution>
+	</munit:test>
+
+
+</mule>

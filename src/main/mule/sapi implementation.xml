@@ -7,18 +7,6 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="b2981303-5375-473b-aa4f-75ae407a768a">
 		<http:request-connection host="sitecore-dch-mock-api.us-e2.cloudhub.io" />
 	</http:request-config>
-	<http:request-config name="HTTP_Request_configuration1" doc:name="HTTP Request configuration" doc:id="9bbcfd27-6bf2-47bf-814a-d895fee2c404" >
-		<http:request-connection host="sitecore-dch-mock-api.us-e2.cloudhub.io" />
-	</http:request-config>
-	<http:request-config name="HTTP_Request_configuration2" doc:name="HTTP Request configuration" doc:id="98cb3259-78a6-42f6-8a88-0c14188603e4" >
-		<http:request-connection host="http://sitecore-dch-mock-api.us-e2.cloudhub.io" />
-	</http:request-config>
-	<http:request-config name="HTTP_Request_configuration3" doc:name="HTTP Request configuration" doc:id="02e5d09f-e8b0-46a1-88cc-9ea5747be41b" >
-		<http:request-connection host="http://sitecore-dch-mock-api.us-e2.cloudhub.io" />
-	</http:request-config>
-	<flow name="getquery" doc:id="fdaa4e99-ac2b-4cc6-9e18-323d2b5ad26f" >
-		<http:request method="GET" doc:name="Request" doc:id="2569ba88-ffc9-418c-9b18-c95c1214e63e" config-ref="HTTP_Request_configuration1" path="/entities/query"/>
-	</flow>
 	<flow name="getflow" doc:id="a921af3f-8291-43bd-86b9-60c63a136316" >
 		<http:request method="GET" doc:name="Request" doc:id="a075a624-7e50-4791-8e5d-a3266db8c7d7" config-ref="HTTP_Request_configuration" path="/entities/{assetid}">
 			<http:uri-params ><![CDATA[#[output application/java
@@ -30,17 +18,20 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 		<logger level="INFO" doc:name="Logger" doc:id="0db41f18-2803-41c2-893e-0323794a752e" message='#[payload] ++ "the assets are recieved successfully"'/>
 	</flow>
 	<flow name="putbyassetid" doc:id="3ad1b9e3-6d1d-4a95-9074-8ec7e9e4f26f" >
-		<http:request method="PUT" doc:name="Request" doc:id="89dc827c-93bc-43bd-9a7b-540d25cbd1b8" config-ref="HTTP_Request_configuration2" path="/entities/{assetid}">
+		<http:request method="PUT" doc:name="Request" doc:id="89dc827c-93bc-43bd-9a7b-540d25cbd1b8" path="/entities/{assetid}" config-ref="HTTP_Request_configuration">
 			<http:uri-params ><![CDATA[#[output application/java
 ---
 {
-	"assetid" : "2668742"
+	"assetid" : "4668750"
 }]]]></http:uri-params>
 		</http:request>
 		<logger level="INFO" doc:name="Logger" doc:id="423b3343-3ca5-4dff-97ff-23f8b61b3378" />
 	</flow>
 	<flow name="searchpost" doc:id="d2a31755-1c66-4feb-9b8c-b513ab5567f0" >
-		<http:request method="POST" doc:name="Request" doc:id="d8c9bd3d-9f33-4f29-8231-44d3f62c6e18" config-ref="HTTP_Request_configuration3" path="/search"/>
+		<http:request method="POST" doc:name="Request" doc:id="d8c9bd3d-9f33-4f29-8231-44d3f62c6e18" config-ref="HTTP_Request_configuration" path="/search"/>
 		<logger level="INFO" doc:name="Logger" doc:id="c628aee7-d76c-4099-a78e-e52ebacbd5ab" message='"the new asset created successfully"'/>
+	</flow>
+	<flow name="getquery" doc:id="8f5132e6-5505-468f-a79e-7e47cec65926" >
+		<logger level="INFO" doc:name="Logger" doc:id="891e4ddb-3c16-4613-9ea1-2b16c1710f92" />
 	</flow>
 </mule>
