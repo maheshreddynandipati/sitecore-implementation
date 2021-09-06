@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="0eb9b7f7-7783-470b-a870-56750dcc59ed" >
+		<http:request-connection host="sitecore-dch-mock-api.us-e2.cloudhub.io" />
+	</http:request-config>
+	<http:request-config name="HTTP_Request_configuration1" doc:name="HTTP Request configuration" doc:id="f05193f3-e435-456e-8dd4-6c501835fca9" >
+		<http:request-connection host="sitecore-dch-mock-api.us-e2.cloudhub.io" />
+	</http:request-config>
+	<flow name="getassetbyId" doc:id="cb93732a-fe7c-45c5-90d6-e481be00d456" >
+		<http:request method="GET" doc:name="Request" doc:id="6486e134-8e97-40fe-be51-0c58f46d4445" config-ref="HTTP_Request_configuration" path="/entities/{assetid}">
+			<http:uri-params ><![CDATA[#[output application/java
+---
+{
+	"assetid" : "4668750"
+}]]]></http:uri-params>
+		</http:request>
+		<logger level="INFO" doc:name="Logger" doc:id="c959421d-7724-4af6-bfa8-281665a7b12a" message="the assets are retrieved successfully"/>
+	</flow>
+	<flow name="putassets" doc:id="7c163df0-af61-4164-8ee0-0eafaf8aba7f" >
+		<http:request method="PUT" doc:name="Request" doc:id="28797984-c530-43f1-8a53-f71b7586a20e" config-ref="HTTP_Request_configuration1" path="/entities/{assetid}">
+			<http:uri-params ><![CDATA[#[output application/java
+---
+{
+	"assetid" : "4668750"
+}]]]></http:uri-params>
+		</http:request>
+		<logger level="INFO" doc:name="Logger" doc:id="de5131e5-a25d-47e8-a02c-44ee118da124" message="the assets are updated successfully"/>
+	</flow>
+	<flow name="postassets" doc:id="42789aa6-b7eb-46e0-a69e-bd5a166af2fe" >
+		<http:request method="POST" doc:name="Request" doc:id="dfa23556-3d74-478d-b4ab-6ecc191f91d4" config-ref="HTTP_Request_configuration" path="/search">
+		</http:request>
+		<logger level="INFO" doc:name="Logger" doc:id="3d8b171f-d2df-42ea-bf74-a02e492c796f" />
+	</flow>
+</mule>

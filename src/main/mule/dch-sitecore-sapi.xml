@@ -15,21 +15,15 @@
             </http:error-response>
         </http:listener>
         <apikit:router config-ref="dch-sitecore-sapi-config" />
-        
+       
     </flow>
     <flow name="put:\entities\(assetid):application\json:dch-sitecore-sapi-config">
-		<flow-ref doc:name="Flow Reference" doc:id="95842698-891b-458c-a58b-7b6c076cbbe4" name="putbyassetid"/>
-    </flow>
-    <flow name="get:\health:dch-sitecore-sapi-config">
-        <logger level="INFO" message="get:\health:dch-sitecore-sapi-config" />
-    </flow>
-    <flow name="get:\entities\query:dch-sitecore-sapi-config">
-        <flow-ref doc:name="Flow Reference" doc:id="eee6273c-afe3-4a63-b234-b95264b19f8c" name="getquery"/>
+		<flow-ref doc:name="Flow Reference" doc:id="781d2777-8407-4937-a851-221cadb55f49" name="putassets"/>
     </flow>
     <flow name="get:\entities\(assetid):dch-sitecore-sapi-config">
-		<flow-ref doc:name="Flow Reference" doc:id="84e6d60d-41bc-40b7-b350-7ae3505f3d42" name="getflow"/>
+		<flow-ref doc:name="Flow Reference" doc:id="7cf1ac56-e1b8-493e-9b5e-c2acba71c0be" name="getassetbyId"/>
     </flow>
     <flow name="post:\search:application\json:dch-sitecore-sapi-config">
-		<flow-ref doc:name="Flow Reference" doc:id="69eb1354-4d45-4ff3-b40b-7b55dbfb64cc" name="searchpost"/>
+		<flow-ref doc:name="Flow Reference" doc:id="7bda8b0f-b0a4-4c17-9b11-cda9d2f57761" name="postassets"/>
     </flow>
 </mule>

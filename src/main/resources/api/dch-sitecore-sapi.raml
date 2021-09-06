@@ -1,110 +1,60 @@
 #%RAML 1.0
 title: DCH-Sitecore-SAPI
-description: for the publishing or retrieving the assets into the sitecore
-version: v1
-baseUri: https://anypoint.mulesoft.com/api/v1
-mediaType: 
-- application/json
-protocols: [HTTPS,HTTP]
-documentation:
-  - title: sitecore system api
-    content: this system api is used to publish/retrieving the assets into the sitecore.
 types: 
-    searchRequestDataType: !include/datatype/request/searchdataType.raml
-    searchResponseDatatype: !include/datatype/response/search-dataType.raml
-    healthDataType: !include/example/response/health-example.raml
-    queryDataType:  !include/example/response/query-example.json
-    assetDatatype: !include/example/response/retrieve-asset-example.json
-uses:
-  lib: /libraries/library.raml
-
-securitySchemes:
-  client_Id: !include /security-scheme/custom-securityScheme.raml       
-
-  
+    searchRequestDataType: !include /datatype/request/searchdataType.raml
+    searchResponseDatatype: !include /datatype/response/search-dataType.raml
+    assetDatatype: !include /datatype/response/retrieve-asset-dataType.raml
 
 
-/health:
-  get:
-    displayName: health check
-    is: [lib.headers,lib.errorCodes]
-    description: endpoint to chech health
-    responses:
-      200:
-        body:
-          application/json:
-            type: healthDataType
-            example: !include/example/response/health-example.raml
-              
+   
 
 /entities:
-  /query:
-    get:
-      is: [lib.headers,lib.errorCodes]
-      displayName: Get Assets
-      
-      securedBy:
-        - client_Id
-      description: endpoint to get assets from sitecore by queryparameter query
-      queryParameters:
-          query:
-            type: any
-            example: !include example/request/query-example.raml
-      responses:
-        200:
-          body:
-            application/json:
-              type: queryDataType
-              example: !include/example/response/query-example.json
-                  
   /{assetid}:
     get:
       displayName: get assets by id
-      is: [lib.headers,lib.errorCodes]
       description: endpoints to get assets one by one
       responses:
         200:
           body:
             application/json:
-              type: assetDatatype
-              example: !include/example/response/retrieve-asset-example.json
+              type: assetDatatype[]
+              example: !include /example/response/retrieve-asset-example.json 
 
     put:
       displayName: update asset url
       description: endpoint to update the asset url
-      securedBy:
-        - client_Id
       body:
         application/json:
-            type: assetDatatype
+            type: assetDatatype[]
             example: !include example/request/update-asset.json
       responses:
         200:
           body:
             application/json:
-              type: assetDatatype
-              example: !include/example/response/update-example.json
+              type: assetDatatype[]
+              example: !include example/response/update-example.json
 
 
                 
 /search:
   post:
     displayName: Add Assets
-    is: [lib.headers,lib.errorCodes]
-    securedBy:
-      - client_Id
-    description: Endpoint to add assets into sitecore
+    description: search asset from sitecore
     body:
-        application/json:
-            type: searchRequestDataType
-            example: !include example/request/search-example.json
+      application/json:
+        type: searchRequestDataType
+        example: !include /example/request/search-example.json
     responses:
-        201:
-          body:
-            application/json:
-               type:  searchResponseDatatype
-               example: !include example/response/search-example.json
-
+          201:
+                body:
+                      application/json:
+                            type: searchResponseDatatype
+                            example: !include /example/response/search-example.json
+                                      
+          
+    
+   
+    
                 
 
 

@@ -1,0 +1,391 @@
+#%RAML 1.0 DataType
+type: object
+properties:
+  id:
+    type: number
+  identifier:
+    type: string
+  cultures:
+    type: array
+    items:
+      type: string
+  properties:
+    type: object
+    properties:
+      Filename?:
+        type: string
+      Title:
+        type: string
+      Description:
+        type: object
+        properties:
+          en-US:
+            type: string
+      Keywords:
+        type: string | nil
+      OccasionOrSeason:
+        type: array | nil
+      Language:
+        type: array | nil
+      Comments:
+        type: string | nil
+      MIMEType:
+        type: string
+      UsageSummary:
+        type: string | nil
+      UsageURL:
+        type: string | nil
+      PublicationDate:
+        type: string | nil
+      SmartBrandLegacyAssetID:
+        type: string | nil
+      SmartApproveLegacyProjectID:
+        type: string | nil
+      MigratedSmartBrandData:
+        type: string | nil
+      SmartbrandLegacyTaxonomyData:
+        type: string | nil
+      SmartbrandLegacyLightboxes:
+        type: string | nil
+      UsageRightsType:
+        type: object
+        properties:
+          identifier:
+            type: string
+          labels:
+            type: object
+            properties:
+              en-US:
+                type: string
+      CostofRenegotiation:
+        type: string | nil
+      ApprovedBy:
+        type: string
+      ApprovedDate?:
+        type: string
+  relations:
+    type: object
+    properties:
+      CategoryToAsset:
+        type: object
+        properties:
+          parents:
+            type: array
+            items:
+              type: object
+              properties:
+                properties:
+                  type: object
+                  properties:
+                    TaxonomyLabel:
+                      type: object
+                      properties:
+                        en-US:
+                          type: string
+                    LevelIdentifier:
+                      type: string
+                href:
+                  type: string
+          inherits_security:
+            type: boolean
+          self:
+            type: object
+            properties:
+              href:
+                type: string
+      AssetTypeToAsset:
+        type: object
+        properties:
+          parent:
+            type: object
+            properties:
+              properties:
+                type: object
+                properties:
+                  Label:
+                    type: object
+                    properties:
+                      en-US:
+                        type: string
+              href:
+                type: string
+              inherits_security?:
+                type: boolean
+              self?:
+                type: object
+                properties:
+                  href:
+                    type: string
+      CreatedForMarketToAsset:
+        type: object
+        properties:
+          parents:
+            type: array
+            items:
+              type: object
+              properties:
+                properties:
+                  type: object
+                  properties:
+                    TaxonomyLabel:
+                      type: object
+                      properties:
+                        en-US:
+                          type: string
+                href:
+                  type: string
+          inherits_security:
+            type: boolean
+          self:
+            type: object
+            properties:
+              href:
+                type: string
+      TagToAsset:
+        type: object
+        properties:
+          href:
+            type: string
+      GalleryToAsset:
+        type: object
+        properties:
+          parents:
+            type: array
+          inherits_security:
+            type: boolean
+          self:
+            type: object
+            properties:
+              href:
+                type: string  
+      ReportingSystemToAsset:
+        type: object
+        properties:
+          parents:
+            type: array
+          inherits_security:
+            type: boolean
+          self:
+            type: object
+            properties:
+              href:
+                type: string
+      DRM_RightsProfile_RightsProfileToAsset:
+        type: object
+        properties:
+          parents:
+            type: array
+          inherits_security:
+            type: boolean
+          self:
+            type: object
+            properties:
+              href:
+                type: string
+      RecipeToAsset:
+        type: object
+        properties:
+          href:
+            type: string
+      MasterFile:
+        type: object
+        properties:
+          children:
+            type: array      
+            items:
+              type: object
+              properties:
+                href:
+                  type: string
+          inherits_security:
+            type: boolean
+          self:
+            type: object
+            properties:
+              href:
+                type: string
+  created_by:
+    type: object
+    properties:
+      href:
+        type: string
+      title:
+        type: string
+  created_on:
+    type: string
+  modified_by:
+    type: object
+    properties:
+      href:
+        type: string
+      title:
+        type: string
+  modified_on:
+    type: string
+  entitydefinition:
+    type: object
+    properties:
+      href:
+        type: string
+      title:
+        type: string
+  copy:
+    type: object
+    properties:
+      href:
+        type: string
+      title:
+        type: string
+  permissions:
+    type: object
+    properties:
+      href:
+        type: string
+      title:
+        type: string
+  lifecycle:
+    type: object
+    properties:
+      href:
+        type: string
+      title:
+        type: string
+  saved_selections:
+    type: object
+    properties:
+      href:
+        type: string
+      title:
+        type: string
+  roles:
+    type: object
+    properties:
+      href:
+        type: string
+      title:
+        type: string
+  annotations:
+    type: object
+    properties:
+      href:
+        type: string
+      title:
+        type: string
+  is_root_taxonomy_item:
+    type: boolean
+  is_path_root:
+    type: boolean
+  inherits_security:
+    type: boolean
+  is_system_owned:
+    type: boolean
+  version:
+    type: number
+  full?:
+    type: object
+    properties:
+      href:
+        type: string
+  self:
+    type: object
+    properties:
+      href:
+        type: string
+  renditions:
+    type: object
+    properties:
+      downloadOriginal:
+        type: array
+        items:
+          type: object
+          properties:
+            href:
+              type: string
+      metadata:
+        type: array
+        items:
+          type: object
+          properties:
+            href:
+              type: string 
+      downloadPreview?:
+        type: array
+        items:
+          type: object
+          properties:
+            href:
+              type: string 
+      thumbnail:
+        type: array
+        items:
+          type: object
+          properties:
+            href:
+              type: string 
+  related_paths:
+    type: object
+    properties:
+      CategoryToAsset:
+        type: array
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              values:
+                type: object
+                properties:
+                  en-US:
+                    type: string
+              entity:
+                type: string
+              definition:
+                type: string
+      AssetTypeToAsset:
+        type: array
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              values:
+                type: object
+                properties:
+                  en-US:
+                    type: string
+              entity:
+                type: string
+              definition:
+                type: string
+      CreatorMarketToAsset:
+        type: array
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              values:
+                type: object
+                properties:
+                  en-US:
+                    type: string
+              entity:
+                type: string
+              definition:
+                type: string
+      CreatedForMarketToAsset:
+        type: array
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              values:
+                type: object
+                properties:
+                  en-US:
+                    type: string
+              entity:
+                type: string
+              definition:
+                type: string

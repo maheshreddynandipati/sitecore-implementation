@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="flows-suite.xml" />
+	<munit:test name="postassets-test" doc:id="3f082119-d085-4bc6-928b-a7c9bfe5c208" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Request" doc:id="a34674cb-cd2b-4e9e-a14c-b1b34820af86" processor="http:request">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="dfa23556-3d74-478d-b4ab-6ecc191f91d4" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/json --- readUrl('classpath://postassetstest\mock_payload.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					<munit-tools:attributes value="#[readUrl('classpath://postassetstest\mock_attributes.dwl')]" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://postassetstest\mock_variable_.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="75698bef-7e1a-4020-89f9-63425ac97ead" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://postassetstest\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://postassetstest\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://postassetstest\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to postassets" doc:id="b177a316-c985-45d2-a03b-0ac3818515ca" name="postassets"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="46891645-8573-4a0f-a2d9-aac7082e0a01" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import postassetstest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="putassets-test" doc:id="a7ff00c3-6261-4c06-8628-3f19c8099278" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Request" doc:id="f890a487-2e12-4e42-a079-ab5e77bd1439" processor="http:request">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="28797984-c530-43f1-8a53-f71b7586a20e" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/json --- readUrl('classpath://putassetstest\mock_payload1.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					<munit-tools:attributes value="#[readUrl('classpath://putassetstest\mock_attributes1.dwl')]" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://putassetstest\mock_variable_1.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="367265ab-4c13-4032-ab5d-03da268cc89b" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://putassetstest\set-event_payload1.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://putassetstest\set-event_attributes1.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://putassetstest\set-event_variable_1.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to putassets" doc:id="be15b7e2-ff06-4ad8-bf37-d5c593f95002" name="putassets"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="f63086dc-9b65-4455-ab6d-8e30653b3995" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import putassetstest::assert_expression_payload1
+---
+assert_expression_payload1::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="putassets-test1" doc:id="67f53f53-ee54-4294-8487-742dbd965141" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Request" doc:id="fc5109a5-d2a0-4e54-b429-8a4cba171b7c" processor="http:request">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="28797984-c530-43f1-8a53-f71b7586a20e" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/json --- readUrl('classpath://putassetstest1\mock_payload.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					<munit-tools:attributes value="#[readUrl('classpath://putassetstest1\mock_attributes.dwl')]" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://putassetstest1\mock_variable_.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="319617d2-c0f6-41f7-a5f5-498dd404a9f1" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://putassetstest1\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://putassetstest1\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://putassetstest1\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to putassets" doc:id="29361a72-10bd-4876-95fc-8693717c92a4" name="putassets"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="a7211df2-c4f8-452d-b92a-4115f2cc6b55" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import putassetstest1::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="putassets-test2" doc:id="75e42217-d1dd-4f06-b21d-6a1af15eb61d" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Request" doc:id="6c9fa08d-7399-4061-b732-99637831ceb5" processor="http:request">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="28797984-c530-43f1-8a53-f71b7586a20e" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/json --- readUrl('classpath://putassetstest2\mock_payload.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					<munit-tools:attributes value="#[readUrl('classpath://putassetstest2\mock_attributes.dwl')]" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://putassetstest2\mock_variable_.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="cc567ee9-93c4-4b15-85d7-8ef68e248c81" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://putassetstest2\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://putassetstest2\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://putassetstest2\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to putassets" doc:id="2060b7ef-983e-42ca-af25-f5265f09eaed" name="putassets"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="dd9e9d9e-a2ae-4fb2-a6f5-5dcff9a00f9f" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import putassetstest2::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="putassets-test3" doc:id="25693074-da85-470d-a309-e52c3c947ac1" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Request" doc:id="e52596d8-438a-4640-930c-94c204866854" processor="http:request">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="28797984-c530-43f1-8a53-f71b7586a20e" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/json --- readUrl('classpath://putassetstest3\mock_payload.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					<munit-tools:attributes value="#[readUrl('classpath://putassetstest3\mock_attributes.dwl')]" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://putassetstest3\mock_variable_.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="9a74eca8-cb3b-44f2-9989-fa794882c12e" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://putassetstest3\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://putassetstest3\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://putassetstest3\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to putassets" doc:id="49a83369-f94f-46af-b580-e23f315ce115" name="putassets"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="778b9f62-43db-4563-96f5-9effd5c4a8bb" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import putassetstest3::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="getassetbyId-test" doc:id="ade13461-bd3d-4aa0-9c9c-cf8b2ce69081" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Request" doc:id="ee537903-756c-4e5b-af99-3c2800a6765c" processor="http:request">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="6486e134-8e97-40fe-be51-0c58f46d4445" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/json --- readUrl('classpath://getassetbyIdtest\mock_payload.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					<munit-tools:attributes value="#[readUrl('classpath://getassetbyIdtest\mock_attributes.dwl')]" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://getassetbyIdtest\mock_variable_.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="3c65908d-ea6b-47e0-b37e-397dadaaebab" >
+				<munit:payload value="#[readUrl('classpath://getassetbyIdtest\set-event_payload.dwl')]" encoding="UTF-8" />
+				<munit:attributes value="#[readUrl('classpath://getassetbyIdtest\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://getassetbyIdtest\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to getassetbyId" doc:id="5ff7835a-fe4e-411e-be27-efcd2d447d5c" name="getassetbyId"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="d2678154-4390-4df2-88e3-79e3c9862a69" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import getassetbyIdtest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
